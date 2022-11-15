@@ -14,6 +14,8 @@ class CensusAnalyserTest {
     private String INDIAN_CENSUS_INCORRECT_FILE_FORMAT = "F:\\BridgeLabz\\LFP - 202\\JAVA Stream IO\\IndianStateCensusAnalyser\\src\\main\\resources\\IndiaStateCensusData.txt";
     //Wrong Delimiter
     private String INDIAN_CENSUS_WRONG_DELIMITER = "F:\\BridgeLabz\\LFP - 202\\JAVA Stream IO\\IndianStateCensusAnalyser\\src\\main\\resources\\IndiaStateCensusDataWithWrongDelimiter.csv";
+    //wrongHeader
+    private String INDIAN_CENSUS_WITHWRONG_HEADER = "F:\\BridgeLabz\\LFP - 202\\JAVA Stream IO\\IndianStateCensusAnalyser\\src\\main\\resources\\IndiaStateCensusDataWithWrongHeader.csv";
     //TC1.1- Check to ensure the number of record matches
     @Test
     public void givenIndianCensusCSVFile_WhenLoad_ShouldReturnCorrectRecords() throws IOException, CensusAnalyserException {
@@ -67,6 +69,22 @@ class CensusAnalyserTest {
         }
         catch (CensusAnalyserException e) {
             Assertions.assertEquals(CensusAnalyserException.ExceptionType.CENSUS_WRONG_DELIMITER, e.type);
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    // TC1.5
+    @Test
+    public void givenIndianCensusCSVFile_WhenWrongHeader_ShouldThrowException() {
+
+        try {
+            CensusAnalyser censusAnalyser = new CensusAnalyser();
+            ExpectedException exceptionRule = ExpectedException.none();
+            exceptionRule.expect(CensusAnalyserException.class);
+            censusAnalyser.loadIndiaCensusData(INDIAN_CENSUS_WITHWRONG_HEADER);
+        } catch (CensusAnalyserException e) {
+            Assertions.assertEquals(CensusAnalyserException.ExceptionType.CENSUS_WRONG_DELIMITER_OR_WRONG_HEADER, e.type);
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
