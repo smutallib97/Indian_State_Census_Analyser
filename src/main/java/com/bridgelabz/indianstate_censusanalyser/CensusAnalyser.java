@@ -15,23 +15,18 @@ public class CensusAnalyser {
         try {
             reader = Files.newBufferedReader(Paths.get(csvFilePath));
             CsvToBean<IndiaCensusCSV> csvToBean = new CsvToBeanBuilder<IndiaCensusCSV>(reader)
-                    .withType(IndiaCensusCSV.class)
-                    .withIgnoreLeadingWhiteSpace(true)
-                    .build();
+                    .withType(IndiaCensusCSV.class).withIgnoreLeadingWhiteSpace(true).build();
             Iterator<IndiaCensusCSV> iterator = csvToBean.iterator();
             int numOfEntries = 0;
             while (iterator.hasNext()) {
                 numOfEntries++;
                 iterator.next();
             }
-
             return numOfEntries;
-        } catch (
-                IOException e) {
+        } catch (IOException e)
+        {
             System.out.println(e);
         }
-        
         return 0;
-
     }
 }

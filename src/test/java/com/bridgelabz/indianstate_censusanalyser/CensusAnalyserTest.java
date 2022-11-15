@@ -7,6 +7,7 @@ import java.io.IOException;
 class CensusAnalyserTest {
     private String INDIAN_CENSUS_CSV_FILE_PATH = "F:\\BridgeLabz\\LFP - 202\\JAVA Stream IO\\IndianStateCensusAnalyser\\src\\main\\resources\\IndiaStateCensusData.csv";
 
+    //TC1.1- Check to ensure the number of record matches
     @Test
     public void givenIndianCensusCSVFile_WhenLoad_ShouldReturnCorrectRecords() throws IOException {
 
