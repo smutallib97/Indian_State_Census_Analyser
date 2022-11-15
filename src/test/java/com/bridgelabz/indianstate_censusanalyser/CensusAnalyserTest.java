@@ -18,6 +18,8 @@ class CensusAnalyserTest {
     private String INDIAN_CENSUS_WITHWRONG_HEADER = "F:\\BridgeLabz\\LFP - 202\\JAVA Stream IO\\IndianStateCensusAnalyser\\src\\main\\resources\\IndiaStateCensusDataWithWrongHeader.csv";
     //IndiaStateCodeCsv
     private String INDIAN_STATE_CSV_FILE_PATH = "F:\\BridgeLabz\\LFP - 202\\JAVA Stream IO\\IndianStateCensusAnalyser\\src\\main\\resources\\IndiaStateCode.csv";
+    //wrong path 2.2
+    private String INIDAN_STATE__CODE_WRONGCSV_FILE_PATH = "F:\\BridgeLabz\\LFP - 202\\JAVA Stream IO\\IndiaStateCode.csv";
     //TC1.1- Check to ensure the number of record matches
     @Test
     public void givenIndianCensusCSVFile_WhenLoad_ShouldReturnCorrectRecords() throws IOException, CensusAnalyserException {
@@ -98,5 +100,20 @@ class CensusAnalyserTest {
         CensusAnalyser censusAnalyser = new CensusAnalyser();
         int count = censusAnalyser.loadIndianStateCodeData(INDIAN_STATE_CSV_FILE_PATH);
         Assertions.assertEquals(37, count);
+    }
+    // TC2.2
+    @Test
+    public void givenIndianStateCode_WrongCSVFile_WhenLoad_ShouldReturnException() {
+        try {
+            CensusAnalyser censusAnalyser = new CensusAnalyser();
+            ExpectedException exceptionRule = ExpectedException.none();
+            exceptionRule.expect(CensusAnalyserException.class);
+            censusAnalyser.loadIndianStateCodeData(INIDAN_STATE__CODE_WRONGCSV_FILE_PATH);
+        } catch (CensusAnalyserException e) {
+            Assertions.assertEquals(e.type, CensusAnalyserException.ExceptionType.CENSUS_FILE_INCORRECT);
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
