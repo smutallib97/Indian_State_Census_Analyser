@@ -27,7 +27,7 @@ public class CensusAnalyser {
             return count;
         }
         catch (RuntimeException e) {
-            throw new CensusAnalyserException("CSV File Must Have Comma As Delimiter", CensusAnalyserException.ExceptionType.CENSUS_WRONG_DELIMITER);
+            throw new CensusAnalyserException("CSV File Must Have Comma As Delimiter Or Has Incorrect Header", CensusAnalyserException.ExceptionType.CENSUS_WRONG_DELIMITER_OR_WRONG_HEADER);
         }
         catch (IOException e)
         {
